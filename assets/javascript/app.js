@@ -91,7 +91,7 @@ $(document).ready(function(){
       
       // an array of all the user options for the current question
       var questionOptions = Object.values(trivia.options)[trivia.currentSet];
-      
+      $("#options").show();
       // creates all the trivia guess options in the html
       $.each(questionOptions, function(index, key){
         $('#options').append($('<button class="option btn btn-info btn-lg">'+key+'</button>'));
@@ -151,8 +151,9 @@ $(document).ready(function(){
         
         trivia.correct++;
         clearInterval(trivia.timerId);
-        resultId = setTimeout(trivia.guessResult, 1000);
+        resultId = setTimeout(trivia.guessResult, 2000);
         $('#results').html('<h3>Correct Answer!</h3>');
+        $("#options").hide();
       }
       // else the user picked the wrong option, increment incorrect
       else{
@@ -163,6 +164,8 @@ $(document).ready(function(){
         clearInterval(trivia.timerId);
         resultId = setTimeout(trivia.guessResult, 2000);
         $('#results').html('<h3>Better luck next time! </h3>');
+        $('#results').append("<h3> The Correct answer is: " + currentAnswer + "</h3>");
+        $("#options").hide();
       }
       
     },
